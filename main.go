@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -12,10 +11,12 @@ import (
 	"github.com/iseolin76/GoGo/config"
 )
 
-func init() { flag.Parse() }
+var (
+	token = os.Getenv("TOKEN");
+)
 
 func main() {
-	dg, err := discordgo.New("Bot " + config.Token)
+	dg, err := discordgo.New("Bot " + token)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -50,10 +51,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if len(strings.Fields(m.Content)) > 1 {
 		msg = string(strings.Fields(m.Content)[1])
 	}
-	if prefix == config.AddCommand {
+	if prefix == config.ADD_COMMAND || prefix == config.DELETE_COMMAND {
 		s.ChannelMessageSend(m.ChannelID, "준비 중인 기능입니다.")
 	}
-	if prefix != config.Prefix  {
+	if prefix != config.PREFIX  {
 		return
 	}
 	if msg == "ping" {
