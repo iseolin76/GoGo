@@ -18,6 +18,8 @@ func main() {
 		return
 	}
 
+	fmt.Printf("좀 돼라 하")
+
 	dg.AddHandler(messageCreate)
 
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
