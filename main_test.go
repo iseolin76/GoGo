@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/iseolin76/GoGo/config"
+	"github.com/iseolin76/gogo/config"
 )
 
 var (

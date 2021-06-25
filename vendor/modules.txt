@@ -3,6 +3,9 @@
 github.com/bwmarrin/discordgo
 # github.com/gorilla/websocket v1.4.0
 github.com/gorilla/websocket
+# github.com/iseolin76/GoGo v0.0.0-20210625155034-6133067afda7
+## explicit
+github.com/iseolin76/GoGo/config
 # golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16
 golang.org/x/crypto/internal/subtle
 golang.org/x/crypto/nacl/secretbox
