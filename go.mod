@@ -1,8 +1,8 @@
-module github.com/iseolin76/gogo
+module github.com/iseolin76/GoGo
 
-go 1.15
+go 1.16
 
 require (
 	github.com/bwmarrin/discordgo v0.23.2
-	github.com/iseolin76/GoGo v0.0.0-20210625155034-6133067afda7
+	github.com/iseolin76/gogo v0.0.0-20210625155234-f3079ec7056e
 )
