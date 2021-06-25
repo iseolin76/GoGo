@@ -19,3 +19,5 @@ config/token.go
 # vendor/
 
 .DS_Store
+
+go.sum
