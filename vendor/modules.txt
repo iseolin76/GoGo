@@ -1,0 +1,14 @@
+# github.com/bwmarrin/discordgo v0.23.2
+## explicit
+github.com/bwmarrin/discordgo
+# github.com/gorilla/websocket v1.4.0
+github.com/gorilla/websocket
+# golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
+## explicit
+golang.org/x/crypto/internal/subtle
+golang.org/x/crypto/nacl/secretbox
+golang.org/x/crypto/poly1305
+golang.org/x/crypto/salsa20/salsa
+# golang.org/x/sys v0.0.0-20210616094352-59db8d763f22
+## explicit
+golang.org/x/sys/cpu
