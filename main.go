@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -12,12 +11,12 @@ import (
 	"github.com/iseolin76/GoGo/config"
 )
 
-func init() {
-	flag.Parse();
-}
+var (
+	Token = os.Getenv("TOKEN")
+)
 
 func main() {
-	dg, err := discordgo.New("Bot " + config.Token)
+	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
