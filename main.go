@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -10,6 +11,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/iseolin76/GoGo/config"
 )
+
+func init() {
+	flag.Parse();
+}
 
 func main() {
 	dg, err := discordgo.New("Bot " + config.Token)
