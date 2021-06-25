@@ -1,6 +1,6 @@
 package config
 
-var (
+const (
 	ADD_COMMAND    string = "고커추"
 	PREFIX        string = "고"
 	DELETE_COMMAND string = "고커삭"
