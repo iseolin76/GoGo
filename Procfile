@@ -1,5 +1,4 @@
-worker1: mkdir -p ~/git/GitHub/canha
-worker2: cd ~/git/GitHub/canha
+worker1: mkdir -p ~/git/GitHub/canha \n cd ~/git/GitHub/canha
 worker3: git clone https://github.com/canha/golang-tools-install-script 
 worker4: cd golang-tools-install-script/
 worker5: bash goinstall.sh
