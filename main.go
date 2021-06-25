@@ -11,12 +11,8 @@ import (
 	"github.com/iseolin76/GoGo/config"
 )
 
-var (
-	token = os.Getenv("TOKEN");
-)
-
 func main() {
-	dg, err := discordgo.New("Bot " + token)
+	dg, err := discordgo.New("Bot " + config.Token)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -56,6 +52,9 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 	if prefix != config.PREFIX  {
 		return
+	}
+	if msg == "초대코드" {
+		s.ChannelMessageSend(m.ChannelID, config.INVITE_URL)
 	}
 	if msg == "ping" {
 		s.ChannelMessageSend(m.ChannelID, "Pong!")

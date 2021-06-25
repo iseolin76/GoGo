@@ -1,7 +1,6 @@
 package main_test
 
 import (
-	"fmt"
 	"os"
 	"testing"
 
@@ -10,25 +9,29 @@ import (
 )
 
 var (
-  envToken = os.Getenv("TOKEN")
+  envToken, ok = os.LookupEnv("TOKEN")
 )
 
 func TestMain(m *testing.M) {
-  if envToken == "" {
+  if !ok {
     os.Exit(m.Run());
   }
 
-	_, err := discordgo.New("Bot " + envToken)
+	dg, err := discordgo.New("Bot " + envToken)
   if err != nil {
-		fmt.Println("error creating Discord session,", err)
-		return
+    os.Exit(m.Run());
 	}
 
+  err = dg.Open()
+  if err != nil {
+    os.Exit(m.Run());
+  }
 }
 
 func TestMessageCreate(t *testing.T) {
   addCommandEx := "고커추"
   deleteCommandEx := "고커삭"
+  inviteCommandEx := "초대코드"
 
   if addCommandEx != config.ADD_COMMAND {
     t.Fatalf("고커추 접두사가 맞는데도 검사가 잘 되지 않음")
@@ -36,5 +39,9 @@ func TestMessageCreate(t *testing.T) {
 
   if deleteCommandEx != config.DELETE_COMMAND {
     t.Fatalf("고커삭 접두사가 맞는데도 검사가 잘 되지 않음")
+  }
+
+  if inviteCommandEx != config.INVITE_COMMAND {
+    t.Fatalf("초대코드 명령어가 맞는데도 검사가 잘 되지 않음")
   }
 }
