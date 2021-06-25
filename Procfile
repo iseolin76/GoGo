@@ -6,5 +6,4 @@ worker: bash goinstall.sh
 worker: cat ~/.bashrc
 worker: source ~/.bashrc
 worker: cd ~/
-worker: go run main.go
 web: go run main.go
