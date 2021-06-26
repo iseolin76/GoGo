@@ -6,8 +6,10 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/iseolin76/GoGo/api"
 	"github.com/iseolin76/GoGo/config"
 )
 
@@ -57,13 +59,33 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//응답
 	fmt.Println(msg)
-	if msg[1] == "초대코드" {
+	if msg[1] == config.INVITE_COMMAND {
 		s.ChannelMessageSend(m.ChannelID, config.INVITE_URL)
 	}
-	if msg[1] == "ping" {
-		s.ChannelMessageSend(m.ChannelID, "Pong!")
-	}
-	if msg[1] == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	if msg[1] == config.MEAL_COMMAND {
+		now := time.Now();
+		if len(msg) > 2 {
+			switch msg[2] {
+			case "오늘":
+			case "내일":
+				now = now.AddDate( 0,0,1)
+			case "모레":
+				now = now.AddDate( 0,0,2)
+			case "글피":
+				now = now.AddDate( 0,0,3)
+			case "그글피":
+				now = now.AddDate( 0,0,4)
+			case "어제":
+				now = now.AddDate( 0,0,-1)
+			case "그제":
+				now = now.AddDate( 0,0,-2)
+			case "그그제":
+				now = now.AddDate( 0,0,-3)
+			}
+		}
+		date := now.Format("20060102")
+		fmt.Println(date)
+
+		s.ChannelMessageSendEmbed(m.ChannelID, api.NeisMealServiceDietInfo(date))
 	}
 }
