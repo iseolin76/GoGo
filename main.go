@@ -41,29 +41,29 @@ func main() {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	//봇이 보낸 메시지인지 판별
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
-  prefix := string(strings.Fields(m.Content)[0]);
-	var msg string = ""
-
-	if len(strings.Fields(m.Content)) > 1 {
-		msg = string(strings.Fields(m.Content)[1])
-	}
-	if prefix == config.ADD_COMMAND || prefix == config.DELETE_COMMAND {
+	//명령어 검사
+	msg := strings.Split(m.Content, " ")
+	if msg[0] == config.ADD_COMMAND || msg[0] == config.DELETE_COMMAND {
 		s.ChannelMessageSend(m.ChannelID, "준비 중인 기능입니다.")
 	}
-	if prefix != config.PREFIX  {
+	if msg[0] != config.PREFIX  {
 		return
 	}
-	if msg == "초대코드" {
+
+	//응답
+	fmt.Println(msg)
+	if msg[1] == "초대코드" {
 		s.ChannelMessageSend(m.ChannelID, config.INVITE_URL)
 	}
-	if msg == "ping" {
+	if msg[1] == "ping" {
 		s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
-	if msg == "pong" {
+	if msg[1] == "pong" {
 		s.ChannelMessageSend(m.ChannelID, "Ping!")
 	}
 }
