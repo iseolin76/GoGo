@@ -1,11 +1,6 @@
-# github.com/Clinet/discordgo-embed v0.0.0-20190411043415-d754bc1a576c
-## explicit
-github.com/Clinet/discordgo-embed
 # github.com/bwmarrin/discordgo v0.23.2
 ## explicit
 github.com/bwmarrin/discordgo
-# github.com/clinet/discordgo-embed v0.0.0-20190411043415-d754bc1a576c
-## explicit
 # github.com/gorilla/websocket v1.4.0
 github.com/gorilla/websocket
 # golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16
