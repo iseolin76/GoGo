@@ -14,7 +14,7 @@ func EmbedNeisMealServiceDietInfo(schul string, ymd string, menus []string) *dis
 	switch len(menus) {
 	case (3) :
 		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[5:6]+"월 "+ymd[7:]+"일").
+		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
 		SetDescription(schul).
 		AddField(menus[0], menus[1]+"\n"+menus[2]).
 		InlineAllFields().
@@ -23,7 +23,7 @@ func EmbedNeisMealServiceDietInfo(schul string, ymd string, menus []string) *dis
 		SetColor(config.GO_COLOR).MessageEmbed
 	case (6) :
 		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[5:6]+"월 "+ymd[7:]+"일").
+		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
 		SetDescription(schul).
 		AddField(menus[0], menus[1]+"\n"+menus[2]).
 		AddField(menus[3], menus[4]+"\n"+menus[5]).
@@ -33,7 +33,7 @@ func EmbedNeisMealServiceDietInfo(schul string, ymd string, menus []string) *dis
 		SetColor(config.GO_COLOR).MessageEmbed
 	case (9) :
 		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[5:6]+"월 "+ymd[7:]+"일").
+		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
 		SetDescription(schul).
 		AddField(menus[0], menus[1]+"\n"+menus[2]).
 		AddField(menus[3], menus[4]+"\n"+menus[5]).
