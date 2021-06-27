@@ -1,7 +1,6 @@
 package message
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -36,20 +35,23 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//밥 커맨드
 	if msg[1] == config.MEAL_COMMAND || (len(msg) > 2 && msg[2] == config.MEAL_COMMAND) {
-	var date string;
-	if len(msg) > 2 {
-		var message string
-		if msg[1] == config.MEAL_COMMAND {
-			message = msg[2]
+		var date string;
+
+		if len(msg) > 2 {
+			var message string
+
+			if msg[1] == config.MEAL_COMMAND {
+				message = msg[2]
+			} else {
+				message = msg[1]
+			}
+
+			date = util.ReturnDate(message)
 		} else {
-			message = msg[1]
+			now := time.Now();
+			date = now.Format("20060102")	
 		}
-		date = util.ReturnDate(message)
-	} else {
-		now := time.Now();
-		date = now.Format("20060102")	
-		fmt.Println(int(time.Thursday - now.Weekday()))
-	}
+		
 		s.ChannelMessageSendEmbed(m.ChannelID, api.NeisMealServiceDietInfo(date))
 	}
 }
