@@ -29,9 +29,10 @@ func TestMain(m *testing.M) {
 }
 
 func TestMessageCreate(t *testing.T) {
-  addCommandEx := "고커추"
-  deleteCommandEx := "고커삭"
-  inviteCommandEx := "초대코드"
+  addCommandEx := config.ADD_COMMAND
+  deleteCommandEx := config.DELETE_COMMAND
+  inviteCommandEx := config.INVITE_COMMAND
+  mlsvCommandEx := config.MEAL_COMMAND
 
   if addCommandEx != config.ADD_COMMAND {
     t.Fatalf("고커추 접두사가 맞는데도 검사가 잘 되지 않음")
@@ -43,5 +44,9 @@ func TestMessageCreate(t *testing.T) {
 
   if inviteCommandEx != config.INVITE_COMMAND {
     t.Fatalf("초대코드 명령어가 맞는데도 검사가 잘 되지 않음")
+  }
+
+  if mlsvCommandEx != config.MEAL_COMMAND {
+    t.Fatalf("밥 명령어가 맞는데도 검사가 잘 되지 않음")
   }
 }
