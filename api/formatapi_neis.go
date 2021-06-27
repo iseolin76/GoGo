@@ -19,14 +19,14 @@ func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
 	if data.MealServiceDietInfo == nil {
 		return outEmbed.NewEmbed().
 		SetTitle("급식이 없어요!").
-		SetDescription("오늘은 쉬는 날인가??").
+		SetDescription("이 날은 쉬는 날인가??").
 		SetColor(config.GO_COLOR).MessageEmbed
 	}
 
 	mealInfo := data.MealServiceDietInfo[1].Row
 
 	var menus []string
-	//한글만 필터링 할 수 있게 합니다.
+	//한글만 필터링합니다.
 	re := regexp.MustCompile("[가-힣]+")
 	
 	for _, menu := range mealInfo {
