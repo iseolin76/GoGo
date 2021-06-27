@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/iseolin76/GoGo/api"
 	"github.com/iseolin76/GoGo/config"
+	"github.com/iseolin76/GoGo/embed"
 	"github.com/iseolin76/GoGo/util"
 )
 
@@ -51,7 +52,11 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			now := time.Now();
 			date = now.Format("20060102")	
 		}
-		
+
 		s.ChannelMessageSendEmbed(m.ChannelID, api.NeisMealServiceDietInfo(date))
+	}
+
+	if msg[1] == config.HELP_COMMAND {
+		s.ChannelMessageSendEmbed(m.ChannelID, embed.HelpEmbed())
 	}
 }

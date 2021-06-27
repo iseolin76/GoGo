@@ -9,4 +9,5 @@ const (
 	INVITE_URL     string = "https://discord.com/api/oauth2/authorize?client_id=700963738966163487&permissions=8&scope=bot"
 	GO_COLOR       int    = 0x7FD5E9
 	ERR_COLOR      int    = 0xFF1D00
+	HELP_COMMAND   string = "도움말"
 )
