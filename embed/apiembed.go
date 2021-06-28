@@ -6,48 +6,29 @@ import (
 	"github.com/iseolin76/GoGo/config"
 )
 
+// 필요인자: schul: 학교 이름, ymd: 급식 일자, menus: 메뉴들
+
 // 급식정보로 임베드를 만듭니다.
-func EmbedNeisMealServiceDietInfo(schul string, ymd string, menus []string) *discordgo.MessageEmbed {
-	var genericEmbed *discordgo.MessageEmbed
+func EmbedNeisMealServiceDietInfo(schul, ymd string, menus []string) *discordgo.MessageEmbed {
+	mealEmbed := embed.NewEmbed().
+	SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
+	SetDescription(schul)
 
 	//길이에 따라 다르게 임베드를 생성합니다.
-	switch len(menus) {
-	case (3) :
-		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
-		SetDescription(schul).
-		AddField(menus[0], menus[1]+"\n"+menus[2]).
-		InlineAllFields().
-		Truncate().
-		SetFooter(schul).
-		SetColor(config.GO_COLOR).MessageEmbed
-	case (6) :
-		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
-		SetDescription(schul).
-		AddField(menus[0], menus[1]+"\n"+menus[2]).
-		AddField(menus[3], menus[4]+"\n"+menus[5]).
-		InlineAllFields().
-		Truncate().
-		SetFooter(schul).
-		SetColor(config.GO_COLOR).MessageEmbed
-	case (9) :
-		genericEmbed = embed.NewEmbed().
-		SetTitle(ymd[:4]+"년 "+ymd[4:6]+"월 "+ymd[6:]+"일").
-		SetDescription(schul).
-		AddField(menus[0], menus[1]+"\n"+menus[2]).
-		AddField(menus[3], menus[4]+"\n"+menus[5]).
-		AddField(menus[6], menus[7]+"\n"+menus[8]).
-		InlineAllFields().
-		Truncate().
-		SetFooter(schul).
-		SetColor(config.GO_COLOR).MessageEmbed
-	default:
-		return embed.NewEmbed().
-		SetTitle("오잉 뭔가 이상한데?").
-		AddField("개발자에게 문의해주세요. ㅎㄹㅁㄹ#5146", "급식 길이"+ string(rune(len(menus)))).
-		SetColor(config.ERR_COLOR).MessageEmbed
+	for idx := range menus {
+		if len(menus) < idx * 3 + 2 {
+			break
+		}
+		mealEmbed = mealEmbed.
+		AddField(menus[idx*3], menus[idx*3+1]+"\n"+menus[idx*3+2])
 	}
+
+	mealEmbed = mealEmbed.
+	InlineAllFields().
+	Truncate().
+	SetFooter(schul).
+	SetColor(config.GO_COLOR)
 	
-	return genericEmbed;
+	return mealEmbed.MessageEmbed;
 }
+
