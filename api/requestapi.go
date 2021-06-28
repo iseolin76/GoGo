@@ -1,16 +1,11 @@
 package api
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/iseolin76/GoGo/types"
 )
 
-
-
-func requestApi(requestUrl string) types.MealServiceDietInfoType {
+func requestApi(requestUrl string) []byte {
 	resp, err := http.Get(requestUrl)
 	if err != nil {
 		panic(err)
@@ -20,9 +15,5 @@ func requestApi(requestUrl string) types.MealServiceDietInfoType {
 		panic(err)
 	}
 
-	result := types.MealServiceDietInfoType{}
-
-	json.Unmarshal(data, &result)
-
-	return result
+	return data
 }
