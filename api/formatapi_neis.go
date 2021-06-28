@@ -1,26 +1,27 @@
 package api
 
 import (
+	"encoding/json"
 	"regexp"
 	"strings"
 
-	outEmbed "github.com/Clinet/discordgo-embed"
 	"github.com/bwmarrin/discordgo"
-	"github.com/iseolin76/GoGo/config"
 	"github.com/iseolin76/GoGo/embed"
+	"github.com/iseolin76/GoGo/types"
 )
 
 // 필요인자: 가져올 날짜 ex) 20201203
-// 나이스에서 가져온 급식정보를 discord 임베드로 만들어 리턴합니다.
-func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
-	data := requestApi(mealServiceDietInfo(date))
 
-	//데이터가 비었을 경우 급식이 없다는 임베드를 리턴합니다.
+// 나이스에서 가져온 급식정보를 임베드로 만들어 리턴합니다.
+func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
+	//json을 MealServiceDietInfoType으로 Unmarshaling
+	result := requestApi(mealServiceDietInfo(date))
+	var data types.MealServiceDietInfoType
+	json.Unmarshal(result, &data)
+
+	//데이터가 비었을 경우 데이터가 없다는 임베드를 리턴합니다.
 	if data.MealServiceDietInfo == nil {
-		return outEmbed.NewEmbed().
-		SetTitle("급식이 없어요!").
-		SetDescription("이 날은 쉬는 날인가??").
-		SetColor(config.GO_COLOR).MessageEmbed
+		return embed.NoDataEmbed()
 	}
 
 	mealInfo := data.MealServiceDietInfo[1].Row
