@@ -17,6 +17,7 @@ func HelpEmbed() *discordgo.MessageEmbed {
 	AddField(config.DELETE_COMMAND, "사용자 커맨드를 삭제할 수 있어요!\n사실 귀찮아 아직 안 만듬").
 	AddField(config.HELP_COMMAND, "GoGo의 명령어 목록과 설명을 보여줘요.\n너가 보고 있는 이거").
 	AddField(config.TIMETABLE_COMMAND, "광소마고의 시간표를 보여줘요.\n형식 고[일자(생략가능)] 시간표 [학년] [반]\nex) 고다음주 월요일 시간표 2 1").
+	AddField("오류 및 건의사항은", "깃허브 바로 가기 -> https://github.com/iseolin76/GoGo\n~~별을 홀수 번 눌러주기~~").
 	SetFooter("농협) 356-1052-3698-23 예금주 이서린 \n<- 후원하면 진짜 열심히 일해볼게요..ㅎㅎ \n후원이라고 적고 보내줘야 함").
 	SetColor(config.GO_COLOR).MessageEmbed
 
