@@ -22,3 +22,11 @@ func HelpEmbed() *discordgo.MessageEmbed {
 
 	return helpEmbed
 }
+
+//데이터가 없다는 임베드를 리턴합니다.
+func NoDataEmbed() *discordgo.MessageEmbed {
+	return embed.NewEmbed().
+	SetTitle("데이터가 없어요!").
+	SetDescription("이 날은 쉬는 날인가??").
+	SetColor(config.ERR_COLOR).MessageEmbed
+}
