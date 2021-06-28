@@ -1,27 +1,26 @@
 package api
 
 import (
-	"encoding/json"
 	"regexp"
 	"strings"
 
+	outEmbed "github.com/Clinet/discordgo-embed"
 	"github.com/bwmarrin/discordgo"
+	"github.com/iseolin76/GoGo/config"
 	"github.com/iseolin76/GoGo/embed"
-	"github.com/iseolin76/GoGo/types"
 )
 
 // 필요인자: 가져올 날짜 ex) 20201203
-
-// 나이스에서 가져온 급식정보를 임베드로 만들어 리턴합니다.
+// 나이스에서 가져온 급식정보를 discord 임베드로 만들어 리턴합니다.
 func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
-	//json을 MealServiceDietInfoType으로 Unmarshaling
-	result := requestApi(mealServiceDietInfo(date))
-	var data types.MealServiceDietInfoType
-	json.Unmarshal(result, &data)
+	data := requestApi(mealServiceDietInfo(date))
 
-	//데이터가 비었을 경우 데이터가 없다는 임베드를 리턴합니다.
+	//데이터가 비었을 경우 급식이 없다는 임베드를 리턴합니다.
 	if data.MealServiceDietInfo == nil {
-		return embed.NoDataEmbed()
+		return outEmbed.NewEmbed().
+		SetTitle("급식이 없어요!").
+		SetDescription("이 날은 쉬는 날인가??").
+		SetColor(config.GO_COLOR).MessageEmbed
 	}
 
 	mealInfo := data.MealServiceDietInfo[1].Row
@@ -40,35 +39,4 @@ func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
 	ymd:= mealInfo[0].MlsvYmd
 
 	return embed.EmbedNeisMealServiceDietInfo(schul, ymd, menus)
-}
-
-// 필요인자: 가져올 날짜 ex) 20201203
-
-// 나이스에서 가져온 시간표 정보를 임베드로 만들어 리턴합니다.
-func NeisHisTimetable(date, grade, classNm string) *discordgo.MessageEmbed {
-	//json을 HisTimetableType Unmarshaling
-	result := requestApi(hisTimetable(date, grade, classNm))
-	var data types.HisTimetableType
-	json.Unmarshal(result, &data)
-
-
-	//데이터가 비었을 경우 데이터가 없다는 임베드를 리턴합니다.
-	if data.HisTimetable == nil {
-		return embed.NoDataEmbed()
-	}
-
-	timeTable := data.HisTimetable[1].Row
-
-	var times = make(map[string]string)
-
-	for _, time := range timeTable {
-		times[time.Perio] = time.ItrtCntnt
-	}
-
-	schul := timeTable[0].SchulNm
-	ymd:= timeTable[0].AllTiYmd
-	grade = timeTable[0].Grade
-	classNm = timeTable[0].ClassNm
-
-	return embed.EmbedNeisHisTimetable(schul, ymd, grade, classNm, times)
 }
