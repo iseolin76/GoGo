@@ -2,7 +2,6 @@ package message
 
 import (
 	"strings"
-	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/iseolin76/GoGo/api"
@@ -44,8 +43,8 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	msg[0] == "ㅂ" ||
 	(len(msg) > 1 && msg[1] == config.MEAL_COMMAND) || 
 	(len(msg) > 2 && msg[2] == config.MEAL_COMMAND) {
-		now := time.Now();
 		var date string;
+		now := util.ReturnDate();
 
 		if len(msg) > 1 {
 			var message string
@@ -79,7 +78,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	(len(msg) > 1 && msg[1] == config.TIMETABLE_COMMAND) ||
 	(len(msg) > 2 && msg[2] == config.TIMETABLE_COMMAND) {
 		if msg[len(msg)-1] != config.TIMETABLE_COMMAND && len(msg) > 2 {
-			now := time.Now();
+			now := util.ReturnDate();
 			var date string;
 			var message string
 			var grade, classNm string
