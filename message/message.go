@@ -69,7 +69,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	//도움말 명령어
-	if msg[0] == config.HELP_COMMAND {
+	if msg[0] == config.HELP_COMMAND || len(msg) > 1 && msg[1] == config.HELP_COMMAND {
 		s.ChannelMessageSendEmbed(m.ChannelID, embed.HelpEmbed())
 	}
 
