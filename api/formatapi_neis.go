@@ -15,9 +15,14 @@ import (
 // 나이스에서 가져온 급식정보를 임베드로 만들어 리턴합니다.
 func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
 	//json을 MealServiceDietInfoType으로 Unmarshaling
-	result := requestApi(mealServiceDietInfo(date))
+	result, err := requestApi(mealServiceDietInfo(date))
 	var data types.MealServiceDietInfoType
 	json.Unmarshal(result, &data)
+
+	//에러가 있을 경우 에러 임베드를 리턴합니다.
+	if err != nil {
+		return embed.ErrorEmbed();
+	}
 
 	//데이터가 비었을 경우 데이터가 없다는 임베드를 리턴합니다.
 	if data.MealServiceDietInfo == nil {
@@ -47,10 +52,14 @@ func NeisMealServiceDietInfo(date string) *discordgo.MessageEmbed {
 // 나이스에서 가져온 시간표 정보를 임베드로 만들어 리턴합니다.
 func NeisHisTimetable(date, grade, classNm string) *discordgo.MessageEmbed {
 	//json을 HisTimetableType Unmarshaling
-	result := requestApi(hisTimetable(date, grade, classNm))
+	result, err := requestApi(hisTimetable(date, grade, classNm))
 	var data types.HisTimetableType
 	json.Unmarshal(result, &data)
 
+	//에러가 있을 경우 에러 임베드를 리턴합니다.
+	if err != nil {
+		return embed.ErrorEmbed();
+	}
 
 	//데이터가 비었을 경우 데이터가 없다는 임베드를 리턴합니다.
 	if data.HisTimetable == nil {
