@@ -31,3 +31,11 @@ func NoDataEmbed() *discordgo.MessageEmbed {
 	SetDescription("이 날은 쉬는 날인가??").
 	SetColor(config.ERR_COLOR).MessageEmbed
 }
+
+//데이터가 없다는 임베드를 리턴합니다.
+func ErrorEmbed() *discordgo.MessageEmbed {
+	return embed.NewEmbed().
+	SetTitle("에러가 발생하였습니다!").
+	SetDescription("개발자에게 문의하여주세요. ㅎㄹㅁㄹ#5146").
+	SetColor(config.ERR_COLOR).MessageEmbed
+}

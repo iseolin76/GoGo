@@ -15,7 +15,12 @@ var (
 )
 
 func main() {
+	sc := make(chan os.Signal, 1)
+
 	dg, err := discordgo.New("Bot " + Token)
+
+	defer dg.Close()
+	
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -32,9 +37,6 @@ func main() {
 	}
 
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
-	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
-
-	dg.Close()
 }

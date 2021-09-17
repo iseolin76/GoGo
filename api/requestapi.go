@@ -2,18 +2,24 @@ package api
 
 import (
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
-func requestApi(requestUrl string) []byte {
+func requestApi(requestUrl string) ([]byte, error) {
 	resp, err := http.Get(requestUrl)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
+	if err != nil {	
+		log.Fatal(err)
+		return nil, err
 	}
 
-	return data
+	defer resp.Body.Close()
+
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+		return nil, err
+	}
+
+	return data, nil
 }
