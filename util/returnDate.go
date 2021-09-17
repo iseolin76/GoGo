@@ -6,6 +6,12 @@ import (
 	"time"
 )
 
+func ReturnDate() time.Time {
+	now := time.Now();
+	loc, _ := time.LoadLocation("Asia/Seoul")
+	return now.In(loc);
+} 
+
 func CheckDate(commandMsg string, now time.Time) time.Time {
 	msg := strings.Split(commandMsg, " ")
 
